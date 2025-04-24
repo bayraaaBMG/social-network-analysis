@@ -1,0 +1,35 @@
+# scripts/analyze_network.py
+
+import networkx as nx
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# 1. Өгөгдөл ачаалж, граф үүсгэх
+data = pd.read_csv("data/edges.csv")  # CSV файлд Source, Target гэсэн багана байгаа гэж үзнэ
+G = nx.from_pandas_edgelist(data, source='Source', target='Target')
+
+# 2. Сүлжээг дүрслэх
+plt.figure(figsize=(10, 8))
+nx.draw(G, with_labels=True, node_color='skyblue', node_size=1200, edge_color='gray')
+plt.title("Сүлжээний граф")
+plt.savefig("results/network_visualization.png")  # Зураг хадгалах
+plt.show()
+
+  Дагалдах зүйлс:
+1. data/edges.csv файл нь ийм бүтэцтэй байна:
+
+csv
+Copy code
+Source,Target
+A,B
+B,C
+A,C
+C,D
+2. requirements.txt файлд шаардлагатай сангууд:
+
+nginx
+Copy code
+networkx
+matplotlib
+pandas
+Хэрвээ community detection, centrality measures, эсвэл interactive graph хийх хүсэлтэй
